@@ -254,9 +254,8 @@ export const useChatStore = create<ChatStore>()(
 
         const systemInfo = createMessage({
           role: "system",
-          content: `IMPRTANT: You are a virtual assistant powered by the ${
-            modelConfig.model
-          } model, now time is ${new Date().toLocaleString()}}`,
+          content: `IMPRTANT: You are a virtual assistant powered by the ${modelConfig.model
+            } model, now time is ${new Date().toLocaleString()}}`,
           id: botMessage.id! + 1,
         });
 

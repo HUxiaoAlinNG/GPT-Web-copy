@@ -353,3 +353,13 @@ pre {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.particle-connect-wallet-btn,.particle-account-info {
+  background-color: rgba(0, 0, 0, 0);
+  border: var(--border-in-light);
+  height: 38px;
+  padding: 0 10px;
+  font-size: 14px;
+    color: var(--black);
+    font-weight: normal;
+}

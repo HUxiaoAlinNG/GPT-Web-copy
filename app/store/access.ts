@@ -1,10 +1,17 @@
+/*
+ * @Author: hiLin 123456
+ * @Date: 2023-05-12 22:19:28
+ * @LastEditors: hiLin 123456
+ * @LastEditTime: 2023-05-13 10:31:03
+ * @FilePath: /ChatGPT-Next-Web/app/store/access.ts
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { StoreKey } from "../constant";
 import { getHeaders } from "../requests";
 import { BOT_HELLO } from "./chat";
 import { ALL_MODELS } from "./config";
-
 export interface AccessControlStore {
   accessCode: string;
   token: string;

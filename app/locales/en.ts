@@ -4,8 +4,10 @@ import type { LocaleType } from "./index";
 const en: LocaleType = {
   WIP: "Coming Soon...",
   Error: {
+    // Unauthorized:
+    //   "Unauthorized access, please enter access code in settings page.",
     Unauthorized:
-      "Unauthorized access, please enter access code in settings page.",
+      "Please connect wallet.",
   },
   ChatItem: {
     ChatItemCount: (count: number) => `${count} messages`,
