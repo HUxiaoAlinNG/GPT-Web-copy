@@ -5,12 +5,12 @@ import styles from "./home.module.scss";
 import { IconButton } from "./button";
 import SettingsIcon from "../icons/settings.svg";
 import GithubIcon from "../icons/github.svg";
-import ChatGptIcon from "../icons/chatgpt.svg";
+import ChatGptIcon from "../icons/arclinks.svg";
 import AddIcon from "../icons/add.svg";
 import CloseIcon from "../icons/close.svg";
 import MaskIcon from "../icons/mask.svg";
 import PluginIcon from "../icons/plugin.svg";
-
+import Image from 'next/image';
 import Locale from "../locales";
 
 import { useAppConfig, useChatStore } from "../store";
@@ -119,12 +119,14 @@ export function SideBar(props: { className?: string }) {
       }`}
     >
       <div className={styles["sidebar-header"]}>
-        <div className={styles["sidebar-title"]}>ChatGPT Next</div>
+        <div className={styles["sidebar-title"]}>
+            Arclinks
+        </div>
         <div className={styles["sidebar-sub-title"]}>
-          Build your own AI assistant.
+        Your pass to 600+ AI tools and user community
         </div>
         <div className={styles["sidebar-logo"] + " no-dark"}>
-          <ChatGptIcon />
+          {/* <ChatGptIcon /> */}
         </div>
       </div>
 
@@ -170,7 +172,7 @@ export function SideBar(props: { className?: string }) {
           </div>
           <div className={styles["sidebar-action"]}>
             <Link to={Path.Settings}>
-              <IconButton icon={<SettingsIcon />} shadow />
+            <IconButton icon={<SettingsIcon />} shadow />
             </Link>
           </div>
           <div className={styles["sidebar-action"]}>

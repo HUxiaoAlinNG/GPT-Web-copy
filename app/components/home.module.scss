@@ -130,7 +130,12 @@
 .sidebar-logo {
   position: absolute;
   right: 0;
-  bottom: 18px;
+  bottom: 40px;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 48px;
+  height: 32px;
+  // background-image:url('/static/images/arclinks.jpg');
 }
 
 .sidebar-title {

@@ -40,6 +40,7 @@ import { ErrorBoundary } from "./error";
 import { InputRange } from "./input-range";
 import { useNavigate } from "react-router-dom";
 import { Avatar, AvatarPicker } from "./emoji";
+import { ConnectButton, useConnectKit, useParticleTheme } from '@particle-network/connect-react-ui';
 
 function EditPromptModal(props: { id: number; onClose: () => void }) {
   const promptStore = usePromptStore();
@@ -279,6 +280,21 @@ export function Settings() {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  const connectKit = useConnectKit();
+  const particleTheme = useParticleTheme();
+  useEffect(()=> {
+    if (connectKit) {
+      console.log(connectKit);
+      connectKit.on('connect',() => {
+        accessStore.updateToken('Arclink.123457');
+        console.log('connect')
+      })
+      connectKit.on('disconnect',() => {
+        accessStore.updateToken('');
+        console.log('disconnect')
+      })
+    }
+  },[connectKit])
 
   return (
     <ErrorBoundary>
@@ -292,6 +308,9 @@ export function Settings() {
           </div>
         </div>
         <div className="window-actions">
+          <div className="window-action-button">
+           <ConnectButton />
+          </div>
           <div className="window-action-button">
             <IconButton
               icon={<ClearIcon />}
@@ -397,6 +416,7 @@ export function Settings() {
             <Select
               value={config.theme}
               onChange={(e) => {
+                (particleTheme as any).setTheme(e.target.value)
                 updateConfig(
                   (config) => (config.theme = e.target.value as any as Theme),
                 );

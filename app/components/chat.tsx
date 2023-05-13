@@ -1,3 +1,4 @@
+/* eslint-disable react/no-string-refs */
 import { useDebouncedCallback } from "use-debounce";
 import { useState, useRef, useEffect, useLayoutEffect } from "react";
 
@@ -20,6 +21,7 @@ import DarkIcon from "../icons/dark.svg";
 import AutoIcon from "../icons/auto.svg";
 import BottomIcon from "../icons/bottom.svg";
 import StopIcon from "../icons/pause.svg";
+import { ConnectButton, useConnectKit } from '@particle-network/connect-react-ui';
 
 import {
   Message,
@@ -618,6 +620,22 @@ export function Chat() {
       doSubmit(text);
     },
   });
+  const connectKit = useConnectKit();
+  useEffect(()=> {
+    if (connectKit) {
+      console.log(connectKit);
+      connectKit.on('connect',() => {
+        accessStore.updateToken('Arclink.123457');
+        console.log('connect')
+      })
+      connectKit.on('disconnect',() => {
+        accessStore.updateToken('');
+        console.log('disconnect')
+      })
+    }
+  },[connectKit])
+  
+  
 
   return (
     <div className={styles.chat} key={session.id}>
@@ -634,6 +652,10 @@ export function Chat() {
           </div>
         </div>
         <div className="window-actions">
+          <div className="window-action-button">
+           <ConnectButton />
+          </div>
+          
           <div className={"window-action-button" + " " + styles.mobile}>
             <IconButton
               icon={<ReturnIcon />}
@@ -712,11 +734,7 @@ export function Chat() {
             >
               <div className={styles["chat-message-container"]}>
                 <div className={styles["chat-message-avatar"]}>
-                  {message.role === "user" ? (
-                    <Avatar avatar={config.avatar} />
-                  ) : (
-                    <MaskAvatar mask={session.mask} />
-                  )}
+                  <Avatar avatar={config.avatar} />
                 </div>
                 {showTyping && (
                   <div className={styles["chat-message-status"]}>
