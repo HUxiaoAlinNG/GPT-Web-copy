@@ -625,11 +625,11 @@ export function Chat() {
     if (connectKit) {
       console.log(connectKit);
       connectKit.on('connect',() => {
-        accessStore.updateToken('Arclink.123457');
+        accessStore.updateCode('Arclink.123457');
         console.log('connect')
       })
       connectKit.on('disconnect',() => {
-        accessStore.updateToken('');
+        accessStore.updateCode('');
         console.log('disconnect')
       })
     }
