@@ -15,7 +15,7 @@ import Locale from "../locales";
 import { Link, useNavigate } from "react-router-dom";
 import { Path } from "../constant";
 import { MaskAvatar } from "./mask";
-import { Mask } from "../store/mask";
+import { Role } from "../store/mask";
 
 export function ChatItem(props: {
   onClick?: () => void;
@@ -27,7 +27,7 @@ export function ChatItem(props: {
   id: number;
   index: number;
   narrow?: boolean;
-  mask: Mask;
+  mask: Role;
 }) {
   return (
     <Draggable draggableId={`${props.id}`} index={props.index}>

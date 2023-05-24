@@ -12,7 +12,7 @@ import { trimTopic } from "../utils";
 import Locale from "../locales";
 import { showToast } from "../components/ui-lib";
 import { ModelType } from "./config";
-import { createEmptyMask, Mask } from "./mask";
+import { createEmptyMask, Role } from "./mask";
 import { StoreKey } from "../constant";
 
 export type Message = ChatCompletionResponseMessage & {
@@ -52,7 +52,7 @@ export interface ChatSession {
   lastUpdate: number;
   lastSummarizeIndex: number;
 
-  mask: Mask;
+  mask: Role;
 }
 
 export const DEFAULT_TOPIC = Locale.Store.DefaultTopic;
@@ -85,7 +85,7 @@ interface ChatStore {
   clearSessions: () => void;
   moveSession: (from: number, to: number) => void;
   selectSession: (index: number) => void;
-  newSession: (mask?: Mask) => void;
+  newSession: (mask?: Role) => void;
   deleteSession: (index: number) => void;
   currentSession: () => ChatSession;
   onNewMessage: (message: Message) => void;
@@ -254,8 +254,9 @@ export const useChatStore = create<ChatStore>()(
 
         const systemInfo = createMessage({
           role: "system",
-          content: `IMPRTANT: You are a virtual assistant powered by the ${modelConfig.model
-            } model, now time is ${new Date().toLocaleString()}}`,
+          content: `IMPRTANT: You are a virtual assistant powered by the ${
+            modelConfig.model
+          } model, now time is ${new Date().toLocaleString()}}`,
           id: botMessage.id! + 1,
         });
 

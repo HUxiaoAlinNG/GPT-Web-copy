@@ -6,8 +6,7 @@ const en: LocaleType = {
   Error: {
     // Unauthorized:
     //   "Unauthorized access, please enter access code in settings page.",
-    Unauthorized:
-      "Please connect wallet.",
+    Unauthorized: "Please connect wallet.",
   },
   ChatItem: {
     ChatItemCount: (count: number) => `${count} messages`,
@@ -35,7 +34,7 @@ const en: LocaleType = {
     Send: "Send",
     Config: {
       Reset: "Reset to Default",
-      SaveAs: "Save as Mask",
+      SaveAs: "Save as Role",
     },
   },
   Export: {
@@ -107,8 +106,8 @@ const en: LocaleType = {
       Title: "Send Preview Bubble",
       SubTitle: "Preview markdown in bubble",
     },
-    Mask: {
-      Title: "Mask Splash Screen",
+    Role: {
+      Title: "Role Splash Screen",
       SubTitle: "Show a mask splash screen before starting new chat",
     },
     Prompt: {
@@ -198,8 +197,8 @@ const en: LocaleType = {
   Plugin: {
     Name: "Plugin",
   },
-  Mask: {
-    Name: "Mask",
+  Role: {
+    Name: "Role",
     Page: {
       Title: "Prompt Template",
       SubTitle: (count: number) => `${count} prompt templates`,
@@ -228,8 +227,8 @@ const en: LocaleType = {
   NewChat: {
     Return: "Return",
     Skip: "Skip",
-    Title: "Pick a Mask",
-    SubTitle: "Chat with the Soul behind the Mask",
+    Title: "Pick a Role",
+    SubTitle: "Choose the person you are meeting with",
     More: "Find More",
     NotShow: "Not Show Again",
     ConfirmNoShow: "Confirm to disable？You can enable it in settings later.",

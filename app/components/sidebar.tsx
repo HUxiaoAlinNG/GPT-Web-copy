@@ -13,7 +13,7 @@ import MaskIcon from "../icons/mask.svg";
 import Image from "next/image";
 import Locale from "../locales";
 
-import { useAppConfig, useChatStore } from "../store";
+import { useAppConfig, useChatStore, useAccessStore } from "../store";
 
 import {
   MAX_SIDEBAR_WIDTH,
@@ -27,6 +27,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { useMobileScreen } from "../utils";
 import dynamic from "next/dynamic";
 import { showToast } from "./ui-lib";
+import {
+  ConnectButton,
+  useConnectKit,
+} from "@particle-network/connect-react-ui";
 
 const ChatList = dynamic(async () => (await import("./chat-list")).ChatList, {
   loading: () => null,
@@ -104,13 +108,29 @@ function useDragSideBar() {
 
 export function SideBar(props: { className?: string }) {
   const chatStore = useChatStore();
+  const accessStore = useAccessStore();
 
   // drag side bar
   const { onDragMouseDown, shouldNarrow } = useDragSideBar();
   const navigate = useNavigate();
   const config = useAppConfig();
+  const isMobileScreen = useMobileScreen();
 
   useHotKey();
+  const connectKit = useConnectKit();
+  useEffect(() => {
+    if (connectKit) {
+      console.log(connectKit);
+      connectKit.on("connect", () => {
+        accessStore.updateCode("Arclink.123457");
+        console.log("connect");
+      });
+      connectKit.on("disconnect", () => {
+        accessStore.updateCode("");
+        console.log("disconnect");
+      });
+    }
+  }, [connectKit]);
 
   return (
     <div
@@ -131,7 +151,7 @@ export function SideBar(props: { className?: string }) {
       <div className={styles["sidebar-header-bar"]}>
         <IconButton
           icon={<MaskIcon />}
-          text={shouldNarrow ? undefined : Locale.Mask.Name}
+          text={shouldNarrow ? undefined : Locale.Role.Name}
           className={styles["sidebar-bar-button"]}
           onClick={() => navigate(Path.NewChat, { state: { fromHome: true } })}
           shadow
@@ -143,8 +163,12 @@ export function SideBar(props: { className?: string }) {
           onClick={() => showToast(Locale.WIP)}
           shadow
         /> */}
+        {isMobileScreen && (
+          <div className={styles["connect-btn"]}>
+            <ConnectButton />
+          </div>
+        )}
       </div>
-
       <div
         className={styles["sidebar-body"]}
         onClick={(e) => {

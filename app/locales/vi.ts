@@ -105,8 +105,8 @@ const vi: LocaleType = {
       Title: "Gửi bong bóng xem trước",
       SubTitle: "Xem trước nội dung markdown bằng bong bóng",
     },
-    Mask: {
-      Title: "Mask Splash Screen",
+    Role: {
+      Title: "Role Splash Screen",
       SubTitle: "Chớp màn hình khi bắt đầu cuộc trò chuyện mới",
     },
     Prompt: {
@@ -194,7 +194,7 @@ const vi: LocaleType = {
   Plugin: {
     Name: "Plugin",
   },
-  Mask: {
+  Role: {
     Name: "Mẫu",
     Page: {
       Title: "Mẫu trò chuyện",

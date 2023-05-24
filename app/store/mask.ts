@@ -6,7 +6,7 @@ import { DEFAULT_TOPIC, Message } from "./chat";
 import { ModelConfig, ModelType, useAppConfig } from "./config";
 import { StoreKey } from "../constant";
 
-export type Mask = {
+export type Role = {
   id: number;
   avatar: string;
   name: string;
@@ -17,18 +17,18 @@ export type Mask = {
 };
 
 export const DEFAULT_MASK_STATE = {
-  masks: {} as Record<number, Mask>,
+  masks: {} as Record<number, Role>,
   globalMaskId: 0,
 };
 
 export type MaskState = typeof DEFAULT_MASK_STATE;
 type MaskStore = MaskState & {
-  create: (mask?: Partial<Mask>) => Mask;
-  update: (id: number, updater: (mask: Mask) => void) => void;
+  create: (mask?: Partial<Role>) => Role;
+  update: (id: number, updater: (mask: Role) => void) => void;
   delete: (id: number) => void;
-  search: (text: string) => Mask[];
-  get: (id?: number) => Mask | null;
-  getAll: () => Mask[];
+  search: (text: string) => Role[];
+  get: (id?: number) => Role | null;
+  getAll: () => Role[];
 };
 
 export const DEFAULT_MASK_ID = 1145141919810;
@@ -42,7 +42,7 @@ export const createEmptyMask = () =>
     modelConfig: { ...useAppConfig.getState().modelConfig },
     lang: getLang(),
     builtin: false,
-  } as Mask);
+  } as Role);
 
 export const useMaskStore = create<MaskStore>()(
   persist(
@@ -93,7 +93,7 @@ export const useMaskStore = create<MaskStore>()(
       },
     }),
     {
-      name: StoreKey.Mask,
+      name: StoreKey.Role,
       version: 2,
     },
   ),

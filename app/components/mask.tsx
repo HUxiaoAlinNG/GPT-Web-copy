@@ -12,7 +12,7 @@ import DeleteIcon from "../icons/delete.svg";
 import EyeIcon from "../icons/eye.svg";
 import CopyIcon from "../icons/copy.svg";
 
-import { DEFAULT_MASK_AVATAR, Mask, useMaskStore } from "../store/mask";
+import { DEFAULT_MASK_AVATAR, Role, useMaskStore } from "../store/mask";
 import { Message, ModelConfig, ROLES, useChatStore } from "../store";
 import { Input, List, ListItem, Modal, Popover, Select } from "./ui-lib";
 import { Avatar, AvatarPicker } from "./emoji";
@@ -27,7 +27,7 @@ import { ModelConfigList } from "./model-config";
 import { FileName, Path } from "../constant";
 import { BUILTIN_MASK_STORE } from "../masks";
 
-export function MaskAvatar(props: { mask: Mask }) {
+export function MaskAvatar(props: { mask: Role }) {
   return props.mask.avatar !== DEFAULT_MASK_AVATAR ? (
     <Avatar avatar={props.mask.avatar} />
   ) : (
@@ -36,8 +36,8 @@ export function MaskAvatar(props: { mask: Mask }) {
 }
 
 export function MaskConfig(props: {
-  mask: Mask;
-  updateMask: Updater<Mask>;
+  mask: Role;
+  updateMask: Updater<Role>;
   extraListItems?: JSX.Element;
   readonly?: boolean;
 }) {
@@ -63,7 +63,7 @@ export function MaskConfig(props: {
       />
 
       <List>
-        <ListItem title={Locale.Mask.Config.Avatar}>
+        <ListItem title={Locale.Role.Config.Avatar}>
           <Popover
             content={
               <AvatarPicker
@@ -84,7 +84,7 @@ export function MaskConfig(props: {
             </div>
           </Popover>
         </ListItem>
-        <ListItem title={Locale.Mask.Config.Name}>
+        <ListItem title={Locale.Role.Config.Name}>
           <input
             type="text"
             value={props.mask.name}
@@ -221,7 +221,7 @@ export function MaskPage() {
     .getAll()
     .filter((m) => !filterLang || m.lang === filterLang);
 
-  const [searchMasks, setSearchMasks] = useState<Mask[]>([]);
+  const [searchMasks, setSearchMasks] = useState<Role[]>([]);
   const [searchText, setSearchText] = useState("");
   const masks = searchText.length > 0 ? searchMasks : allMasks;
 
@@ -266,10 +266,10 @@ export function MaskPage() {
         <div className="window-header">
           <div className="window-header-title">
             <div className="window-header-main-title">
-              {Locale.Mask.Page.Title}
+              {Locale.Role.Page.Title}
             </div>
             <div className="window-header-submai-title">
-              {Locale.Mask.Page.SubTitle(allMasks.length)}
+              {Locale.Role.Page.SubTitle(allMasks.length)}
             </div>
           </div>
 
@@ -303,7 +303,7 @@ export function MaskPage() {
             <input
               type="text"
               className={styles["search-bar"]}
-              placeholder={Locale.Mask.Page.Search}
+              placeholder={Locale.Role.Page.Search}
               autoFocus
               onInput={(e) => onSearch(e.currentTarget.value)}
             />
@@ -332,7 +332,7 @@ export function MaskPage() {
             <IconButton
               className={styles["mask-create"]}
               icon={<AddIcon />}
-              text={Locale.Mask.Page.Create}
+              text={Locale.Role.Page.Create}
               bordered
               onClick={() => {
                 const createdMask = maskStore.create();
@@ -351,7 +351,7 @@ export function MaskPage() {
                   <div className={styles["mask-title"]}>
                     <div className={styles["mask-name"]}>{m.name}</div>
                     <div className={styles["mask-info"] + " one-line"}>
-                      {`${Locale.Mask.Item.Info(m.context.length)} / ${
+                      {`${Locale.Role.Item.Info(m.context.length)} / ${
                         Locale.Settings.Lang.Options[m.lang]
                       } / ${m.modelConfig.model}`}
                     </div>
@@ -360,7 +360,7 @@ export function MaskPage() {
                 <div className={styles["mask-actions"]}>
                   <IconButton
                     icon={<AddIcon />}
-                    text={Locale.Mask.Item.Chat}
+                    text={Locale.Role.Item.Chat}
                     onClick={() => {
                       chatStore.newSession(m);
                       navigate(Path.Chat);
@@ -369,22 +369,22 @@ export function MaskPage() {
                   {m.builtin ? (
                     <IconButton
                       icon={<EyeIcon />}
-                      text={Locale.Mask.Item.View}
+                      text={Locale.Role.Item.View}
                       onClick={() => setEditingMaskId(m.id)}
                     />
                   ) : (
                     <IconButton
                       icon={<EditIcon />}
-                      text={Locale.Mask.Item.Edit}
+                      text={Locale.Role.Item.Edit}
                       onClick={() => setEditingMaskId(m.id)}
                     />
                   )}
                   {!m.builtin && (
                     <IconButton
                       icon={<DeleteIcon />}
-                      text={Locale.Mask.Item.Delete}
+                      text={Locale.Role.Item.Delete}
                       onClick={() => {
-                        if (confirm(Locale.Mask.Item.DeleteConfirm)) {
+                        if (confirm(Locale.Role.Item.DeleteConfirm)) {
                           maskStore.delete(m.id);
                         }
                       }}
@@ -400,12 +400,12 @@ export function MaskPage() {
       {editingMask && (
         <div className="modal-mask">
           <Modal
-            title={Locale.Mask.EditModal.Title(editingMask?.builtin)}
+            title={Locale.Role.EditModal.Title(editingMask?.builtin)}
             onClose={closeMaskModal}
             actions={[
               <IconButton
                 icon={<DownloadIcon />}
-                text={Locale.Mask.EditModal.Download}
+                text={Locale.Role.EditModal.Download}
                 key="export"
                 bordered
                 onClick={() =>
@@ -419,7 +419,7 @@ export function MaskPage() {
                 key="copy"
                 icon={<CopyIcon />}
                 bordered
-                text={Locale.Mask.EditModal.Clone}
+                text={Locale.Role.EditModal.Clone}
                 onClick={() => {
                   navigate(Path.Masks);
                   maskStore.create(editingMask);

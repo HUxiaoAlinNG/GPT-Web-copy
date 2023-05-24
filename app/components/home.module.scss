@@ -35,6 +35,10 @@
     border-radius: 0;
     border: 0;
   }
+  .sidebar-bar-button {
+    background-color: rgba(0, 0, 0, 0) !important;
+    border: var(--border-in-light) !important;
+  }
 }
 
 .sidebar {
@@ -55,7 +59,8 @@
 
     .sidebar-bar-button {
       flex-grow: 1;
-
+      background-color: rgba(0, 0, 0, 0);
+      border: var(--border-in-light);
       &:not(:last-child) {
         margin-right: 10px;
       }
@@ -154,6 +159,9 @@
   flex: 1;
   overflow: auto;
   overflow-x: hidden;
+}
+
+.connect-btn {
 }
 
 .chat-item {

@@ -40,7 +40,11 @@ import { ErrorBoundary } from "./error";
 import { InputRange } from "./input-range";
 import { useNavigate } from "react-router-dom";
 import { Avatar, AvatarPicker } from "./emoji";
-import { ConnectButton, useConnectKit, useParticleTheme } from '@particle-network/connect-react-ui';
+import {
+  ConnectButton,
+  useConnectKit,
+  useParticleTheme,
+} from "@particle-network/connect-react-ui";
 
 function EditPromptModal(props: { id: number; onClose: () => void }) {
   const promptStore = usePromptStore();
@@ -282,19 +286,19 @@ export function Settings() {
   }, []);
   const connectKit = useConnectKit();
   const particleTheme = useParticleTheme();
-  useEffect(()=> {
+  useEffect(() => {
     if (connectKit) {
       console.log(connectKit);
-      connectKit.on('connect',() => {
-        accessStore.updateCode('Arclink.123457');
-        console.log('connect')
-      })
-      connectKit.on('disconnect',() => {
-        accessStore.updateCode('');
-        console.log('disconnect')
-      })
+      connectKit.on("connect", () => {
+        accessStore.updateCode("Arclink.123457");
+        console.log("connect");
+      });
+      connectKit.on("disconnect", () => {
+        accessStore.updateCode("");
+        console.log("disconnect");
+      });
     }
-  },[connectKit])
+  }, [connectKit]);
 
   return (
     <ErrorBoundary>
@@ -309,7 +313,7 @@ export function Settings() {
         </div>
         <div className="window-actions">
           <div className="window-action-button">
-           <ConnectButton />
+            <ConnectButton />
           </div>
           <div className="window-action-button">
             <IconButton
@@ -416,7 +420,7 @@ export function Settings() {
             <Select
               value={config.theme}
               onChange={(e) => {
-                (particleTheme as any).setTheme(e.target.value)
+                (particleTheme as any).setTheme(e.target.value);
                 updateConfig(
                   (config) => (config.theme = e.target.value as any as Theme),
                 );
@@ -481,8 +485,8 @@ export function Settings() {
           </ListItem>
 
           <ListItem
-            title={Locale.Settings.Mask.Title}
-            subTitle={Locale.Settings.Mask.SubTitle}
+            title={Locale.Settings.Role.Title}
+            subTitle={Locale.Settings.Role.SubTitle}
           >
             <input
               type="checkbox"
@@ -499,7 +503,7 @@ export function Settings() {
         </List>
 
         <List>
-          {enabledAccessControl ? (
+          {/* {enabledAccessControl ? (
             <ListItem
               title={Locale.Settings.AccessCode.Title}
               subTitle={Locale.Settings.AccessCode.SubTitle}
@@ -531,7 +535,7 @@ export function Settings() {
                 }}
               />
             </ListItem>
-          ) : null}
+          ) : null} */}
 
           <ListItem
             title={Locale.Settings.Usage.Title}

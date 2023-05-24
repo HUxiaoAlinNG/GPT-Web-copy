@@ -1,4 +1,4 @@
-import { Mask } from "../store/mask";
+import { Role } from "../store/mask";
 import { CN_MASKS } from "./cn";
 import { EN_MASKS } from "./en";
 
@@ -9,10 +9,10 @@ export const BUILTIN_MASK_ID = 100000;
 
 export const BUILTIN_MASK_STORE = {
   buildinId: BUILTIN_MASK_ID,
-  masks: {} as Record<number, Mask>,
+  masks: {} as Record<number, Role>,
   get(id?: number) {
     if (!id) return undefined;
-    return this.masks[id] as Mask | undefined;
+    return this.masks[id] as Role | undefined;
   },
   add(m: BuiltinMask) {
     const mask = { ...m, id: this.buildinId++ };
@@ -21,6 +21,6 @@ export const BUILTIN_MASK_STORE = {
   },
 };
 
-export const BUILTIN_MASKS: Mask[] = [...CN_MASKS, ...EN_MASKS].map((m) =>
+export const BUILTIN_MASKS: Role[] = [...CN_MASKS, ...EN_MASKS].map((m) =>
   BUILTIN_MASK_STORE.add(m),
 );
