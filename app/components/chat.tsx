@@ -21,7 +21,10 @@ import DarkIcon from "../icons/dark.svg";
 import AutoIcon from "../icons/auto.svg";
 import BottomIcon from "../icons/bottom.svg";
 import StopIcon from "../icons/pause.svg";
-import { ConnectButton, useConnectKit } from '@particle-network/connect-react-ui';
+import {
+  ConnectButton,
+  useConnectKit,
+} from "@particle-network/connect-react-ui";
 
 import {
   Message,
@@ -196,19 +199,20 @@ function useSubmitHandler() {
   const submitKey = config.submitKey;
 
   const shouldSubmit = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key !== "Enter") return false;
-    if (e.key === "Enter" && e.nativeEvent.isComposing) return false;
-    return (
-      (config.submitKey === SubmitKey.AltEnter && e.altKey) ||
-      (config.submitKey === SubmitKey.CtrlEnter && e.ctrlKey) ||
-      (config.submitKey === SubmitKey.ShiftEnter && e.shiftKey) ||
-      (config.submitKey === SubmitKey.MetaEnter && e.metaKey) ||
-      (config.submitKey === SubmitKey.Enter &&
-        !e.altKey &&
-        !e.ctrlKey &&
-        !e.shiftKey &&
-        !e.metaKey)
-    );
+    return e.key === "Enter";
+    // if (e.key !== "Enter") return false;
+    // if (e.key === "Enter" && e.nativeEvent.isComposing) return false;
+    // return (
+    // (config.submitKey === SubmitKey.AltEnter && e.altKey) ||
+    // (config.submitKey === SubmitKey.CtrlEnter && e.ctrlKey) ||
+    // (config.submitKey === SubmitKey.ShiftEnter && e.shiftKey) ||
+    // (config.submitKey === SubmitKey.MetaEnter && e.metaKey) ||
+    // (config.submitKey === SubmitKey.Enter &&
+    //   !e.altKey &&
+    //   !e.ctrlKey &&
+    //   !e.shiftKey &&
+    //   !e.metaKey)
+    // );
   };
 
   return {
@@ -621,41 +625,45 @@ export function Chat() {
     },
   });
   const connectKit = useConnectKit();
-  useEffect(()=> {
+  useEffect(() => {
     if (connectKit) {
       console.log(connectKit);
-      connectKit.on('connect',() => {
-        accessStore.updateCode('Arclink.123457');
-        console.log('connect')
-      })
-      connectKit.on('disconnect',() => {
-        accessStore.updateCode('');
-        console.log('disconnect')
-      })
+      connectKit.on("connect", () => {
+        accessStore.updateCode("Arclink.123457");
+        console.log("connect");
+      });
+      connectKit.on("disconnect", () => {
+        accessStore.updateCode("");
+        console.log("disconnect");
+      });
     }
-  },[connectKit])
-  
-  
+  }, [connectKit]);
 
   return (
     <div className={styles.chat} key={session.id}>
       <div className="window-header">
         <div className="window-header-title">
-          <div
-            className={`window-header-main-title " ${styles["chat-body-title"]}`}
-            onClickCapture={renameSession}
-          >
-            {!session.topic ? DEFAULT_TOPIC : session.topic}
-          </div>
-          <div className="window-header-sub-title">
-            {Locale.Chat.SubTitle(session.messages.length)}
-          </div>
+          {!isMobileScreen && (
+            <>
+              <div
+                className={`window-header-main-title " ${styles["chat-body-title"]}`}
+                onClickCapture={renameSession}
+              >
+                {!session.topic ? DEFAULT_TOPIC : session.topic}
+              </div>
+              <div className="window-header-sub-title">
+                {Locale.Chat.SubTitle(session.messages.length)}
+              </div>
+            </>
+          )}
         </div>
         <div className="window-actions">
-          <div className="window-action-button">
-           <ConnectButton />
-          </div>
-          
+          {!isMobileScreen && (
+            <div className="window-action-button">
+              <ConnectButton />
+            </div>
+          )}
+
           <div className={"window-action-button" + " " + styles.mobile}>
             <IconButton
               icon={<ReturnIcon />}
@@ -684,6 +692,11 @@ export function Chat() {
               }}
             />
           </div>
+          {isMobileScreen && (
+            <div className="window-action-button">
+              <ConnectButton />
+            </div>
+          )}
           {!isMobileScreen && (
             <div className="window-action-button">
               <IconButton

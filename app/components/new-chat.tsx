@@ -9,7 +9,7 @@ import LightningIcon from "../icons/lightning.svg";
 import EyeIcon from "../icons/eye.svg";
 
 import { useLocation, useNavigate } from "react-router-dom";
-import { Mask, useMaskStore } from "../store/mask";
+import { Role, useMaskStore } from "../store/mask";
 import Locale from "../locales";
 import { useAppConfig, useChatStore } from "../store";
 import { MaskAvatar } from "./mask";
@@ -26,7 +26,7 @@ function getIntersectionArea(aRect: DOMRect, bRect: DOMRect) {
   return intersectionArea;
 }
 
-function MaskItem(props: { mask: Mask; onClick?: () => void }) {
+function MaskItem(props: { mask: Role; onClick?: () => void }) {
   const domRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -59,8 +59,8 @@ function MaskItem(props: { mask: Mask; onClick?: () => void }) {
   );
 }
 
-function useMaskGroup(masks: Mask[]) {
-  const [groups, setGroups] = useState<Mask[][]>([]);
+function useMaskGroup(masks: Role[]) {
+  const [groups, setGroups] = useState<Role[][]>([]);
 
   useEffect(() => {
     const appBody = document.getElementById(SlotID.AppBody);
@@ -107,7 +107,7 @@ export function NewChat() {
 
   const { state } = useLocation();
 
-  const startChat = (mask?: Mask) => {
+  const startChat = (mask?: Role) => {
     chatStore.newSession(mask);
     setTimeout(() => navigate(Path.Chat), 1);
   };

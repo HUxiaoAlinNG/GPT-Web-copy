@@ -33,7 +33,7 @@ const de: LocaleType = {
     Send: "Senden",
     Config: {
       Reset: "Reset to Default",
-      SaveAs: "Save as Mask",
+      SaveAs: "Save as Role",
     },
   },
   Export: {
@@ -106,8 +106,8 @@ const de: LocaleType = {
       Title: "Vorschau-Bubble senden",
       SubTitle: "Preview markdown in bubble",
     },
-    Mask: {
-      Title: "Mask Splash Screen",
+    Role: {
+      Title: "Role Splash Screen",
       SubTitle: "Show a mask splash screen before starting new chat",
     },
     Prompt: {
@@ -200,8 +200,8 @@ const de: LocaleType = {
   Plugin: {
     Name: "Plugin",
   },
-  Mask: {
-    Name: "Mask",
+  Role: {
+    Name: "Role",
     Page: {
       Title: "Prompt Template",
       SubTitle: (count: number) => `${count} prompt templates`,
@@ -230,8 +230,8 @@ const de: LocaleType = {
   NewChat: {
     Return: "Return",
     Skip: "Skip",
-    Title: "Pick a Mask",
-    SubTitle: "Chat with the Soul behind the Mask",
+    Title: "Pick a Role",
+    SubTitle: "Choose the person you are meeting with",
     More: "Find More",
     NotShow: "Not Show Again",
     ConfirmNoShow: "Confirm to disable？You can enable it in settings later.",
