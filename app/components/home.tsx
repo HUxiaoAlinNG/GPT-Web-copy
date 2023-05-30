@@ -2,7 +2,7 @@
 
 require("../polyfill");
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import styles from "./home.module.scss";
 
@@ -96,7 +96,16 @@ function Screen() {
   const location = useLocation();
   const isHome = location.pathname === Path.Home;
   const isMobileScreen = useMobileScreen();
-
+  const ref = useRef<HTMLDivElement>(null);
+  const [height, setHeight] = useState<undefined | number>(undefined);
+  useEffect(() => {
+    console.log(1);
+    if (isMobileScreen && ref.current && ref.current?.offsetHeight) {
+      if (ref.current && ref.current?.offsetHeight < window.innerHeight) {
+        setHeight(window.innerHeight);
+      }
+    }
+  }, [ref.current]);
   return (
     <div
       className={
@@ -107,6 +116,8 @@ function Screen() {
             : styles.container
         }`
       }
+      ref={ref}
+      style={{ height }}
     >
       <SideBar className={isHome ? styles["sidebar-show"] : ""} />
 

@@ -32,7 +32,7 @@ import {
 } from "../store";
 
 import Locale, { AllLangs, changeLang, getLang } from "../locales";
-import { copyToClipboard } from "../utils";
+import { copyToClipboard, useMobileScreen } from "../utils";
 import Link from "next/link";
 import { Path, UPDATE_URL } from "../constant";
 import { Prompt, SearchService, usePromptStore } from "../store/prompt";
@@ -223,6 +223,7 @@ export function Settings() {
   const currentVersion = formatVersionDate(updateStore.version);
   const remoteId = formatVersionDate(updateStore.remoteVersion);
   const hasNewVersion = currentVersion !== remoteId;
+  const isMobileScreen = useMobileScreen();
 
   function checkUpdate(force = false) {
     setCheckingUpdate(true);
@@ -303,14 +304,17 @@ export function Settings() {
   return (
     <ErrorBoundary>
       <div className="window-header">
-        <div className="window-header-title">
-          <div className="window-header-main-title">
-            {Locale.Settings.Title}
+        {!isMobileScreen && (
+          <div className="window-header-title">
+            <div className="window-header-main-title">
+              {Locale.Settings.Title}
+            </div>
+            <div className="window-header-sub-title">
+              {Locale.Settings.SubTitle}
+            </div>
           </div>
-          <div className="window-header-sub-title">
-            {Locale.Settings.SubTitle}
-          </div>
-        </div>
+        )}
+
         <div className="window-actions">
           <div className="window-action-button">
             <ConnectButton />
