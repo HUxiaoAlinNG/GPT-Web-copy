@@ -289,7 +289,6 @@ export function Settings() {
   const particleTheme = useParticleTheme();
   useEffect(() => {
     if (connectKit) {
-      console.log(connectKit);
       connectKit.on("connect", () => {
         accessStore.updateCode("Arclink.123457");
         console.log("connect");
@@ -300,6 +299,20 @@ export function Settings() {
       });
     }
   }, [connectKit]);
+  useEffect(() => {
+    const sendPreviewBubble = localStorage.getItem("sendPreviewBubble");
+    if (!isMobileScreen && !sendPreviewBubble) {
+      updateConfig((config) => (config.sendPreviewBubble = true));
+    } else if (isMobileScreen && !sendPreviewBubble) {
+      updateConfig((config) => (config.sendPreviewBubble = false));
+    } else if (sendPreviewBubble) {
+      updateConfig(
+        (config) =>
+          (config.sendPreviewBubble =
+            sendPreviewBubble === "true" ? true : false),
+      );
+    }
+  }, []);
 
   return (
     <ErrorBoundary>
@@ -479,12 +492,16 @@ export function Settings() {
             <input
               type="checkbox"
               checked={config.sendPreviewBubble}
-              onChange={(e) =>
+              onChange={(e) => {
                 updateConfig(
                   (config) =>
                     (config.sendPreviewBubble = e.currentTarget.checked),
-                )
-              }
+                );
+                localStorage.setItem(
+                  "sendPreviewBubble",
+                  String(e.currentTarget.checked),
+                );
+              }}
             ></input>
           </ListItem>
 
