@@ -4,8 +4,6 @@ import styles from "./home.module.scss";
 
 import { IconButton } from "./button";
 import SettingsIcon from "../icons/settings.svg";
-// import GithubIcon from "../icons/github.svg";
-import ChatGptIcon from "../icons/arclinks.svg";
 import AddIcon from "../icons/add.svg";
 import CloseIcon from "../icons/close.svg";
 import MaskIcon from "../icons/mask.svg";
@@ -144,7 +142,11 @@ export function SideBar(props: { className?: string }) {
           Your pass to 600+ AI tools and user community
         </div>
         <div className={styles["sidebar-logo"] + " no-dark"}>
-          {/* <ChatGptIcon /> */}
+          <img
+            src="/static/arclinks.png"
+            style={{ position: "static" }}
+            className={styles["sidebar-logo"] + " no-dark"}
+          />
         </div>
       </div>
 
