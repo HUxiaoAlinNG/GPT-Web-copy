@@ -136,17 +136,12 @@ export function SideBar(props: { className?: string }) {
         shouldNarrow && styles["narrow-sidebar"]
       }`}
     >
-      <div className={styles["sidebar-header"]}>
-        <div className={styles["sidebar-title"]}>Arclinks</div>
+      <div className={styles["sidebar-header"]} data-tauri-drag-region>
+        <div className={styles["sidebar-title"]} data-tauri-drag-region>
+          Arclinks
+        </div>
         <div className={styles["sidebar-sub-title"]}>
           Your pass to 600+ AI tools and user community
-        </div>
-        <div className={styles["sidebar-logo"] + " no-dark"}>
-          <img
-            src="/static/arclinks.png"
-            style={{ position: "static" }}
-            className={styles["sidebar-logo"] + " no-dark"}
-          />
         </div>
       </div>
 

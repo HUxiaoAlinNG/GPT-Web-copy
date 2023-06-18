@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { getClientConfig } from "../config/client";
 import { StoreKey } from "../constant";
 
 export enum SubmitKey {
@@ -17,12 +18,12 @@ export enum Theme {
 }
 
 export const DEFAULT_CONFIG = {
-  submitKey: SubmitKey.Enter as SubmitKey,
+  submitKey: SubmitKey.CtrlEnter as SubmitKey,
   avatar: "1f603",
   fontSize: 14,
   theme: Theme.Auto as Theme,
-  tightBorder: false,
-  sendPreviewBubble: false,
+  tightBorder: !!getClientConfig()?.isApp,
+  sendPreviewBubble: true,
   sidebarWidth: 300,
 
   disablePromptHint: false,
@@ -61,11 +62,19 @@ export const ALL_MODELS = [
     available: ENABLE_GPT4,
   },
   {
+    name: "gpt-4-0613",
+    available: ENABLE_GPT4,
+  },
+  {
     name: "gpt-4-32k",
     available: ENABLE_GPT4,
   },
   {
     name: "gpt-4-32k-0314",
+    available: ENABLE_GPT4,
+  },
+  {
+    name: "gpt-4-32k-0613",
     available: ENABLE_GPT4,
   },
   {
@@ -77,15 +86,27 @@ export const ALL_MODELS = [
     available: true,
   },
   {
-    name: "qwen-v1", // 通义千问
+    name: "gpt-3.5-turbo-0613",
+    available: true,
+  },
+  {
+    name: "gpt-3.5-turbo-16k",
+    available: true,
+  },
+  {
+    name: "gpt-3.5-turbo-16k-0613",
+    available: true,
+  },
+  {
+    name: "qwen-v1", // éä¹åé®
     available: false,
   },
   {
-    name: "ernie", // 文心一言
+    name: "ernie", // æå¿ä¸è¨
     available: false,
   },
   {
-    name: "spark", // 讯飞星火
+    name: "spark", // è®¯é£æç«
     available: false,
   },
   {
@@ -116,7 +137,7 @@ export function limitNumber(
 export function limitModel(name: string) {
   return ALL_MODELS.some((m) => m.name === name && m.available)
     ? name
-    : ALL_MODELS[4].name;
+    : "gpt-3.5-turbo";
 }
 
 export const ModalConfigValidator = {

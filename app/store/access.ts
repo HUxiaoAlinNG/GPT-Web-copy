@@ -1,17 +1,19 @@
 /*
- * @Author: hiLin 123456
+ * @Author: hilin hilin
  * @Date: 2023-05-12 22:19:28
- * @LastEditors: hiLin 123456
- * @LastEditTime: 2023-05-13 10:31:03
- * @FilePath: /ChatGPT-Next-Web/app/store/access.ts
+ * @LastEditors: hilin hilin
+ * @LastEditTime: 2023-06-17 22:19:41
+ * @FilePath: /GPT-Web/app/store/access.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { StoreKey } from "../constant";
-import { getHeaders } from "../requests";
+import { DEFAULT_API_HOST, StoreKey } from "../constant";
+import { getHeaders } from "../client/api";
 import { BOT_HELLO } from "./chat";
 import { ALL_MODELS } from "./config";
+import { getClientConfig } from "../config/client";
+
 export interface AccessControlStore {
   accessCode: string;
   token: string;
@@ -22,12 +24,17 @@ export interface AccessControlStore {
 
   updateToken: (_: string) => void;
   updateCode: (_: string) => void;
+  updateOpenAiUrl: (_: string) => void;
   enabledAccessControl: () => boolean;
   isAuthorized: () => boolean;
   fetch: () => void;
 }
 
 let fetchState = 0; // 0 not fetch, 1 fetching, 2 done
+
+const DEFAULT_OPENAI_URL =
+  getClientConfig()?.buildMode === "export" ? DEFAULT_API_HOST : "/api/openai/";
+console.log("[API] default openai url", DEFAULT_OPENAI_URL);
 
 export const useAccessStore = create<AccessControlStore>()(
   persist(
@@ -36,7 +43,7 @@ export const useAccessStore = create<AccessControlStore>()(
       accessCode: "",
       needCode: true,
       hideUserApiKey: false,
-      openaiUrl: "/api/openai/",
+      openaiUrl: DEFAULT_OPENAI_URL,
 
       enabledAccessControl() {
         get().fetch();
@@ -49,6 +56,9 @@ export const useAccessStore = create<AccessControlStore>()(
       updateToken(token: string) {
         set(() => ({ token }));
       },
+      updateOpenAiUrl(url: string) {
+        set(() => ({ openaiUrl: url }));
+      },
       isAuthorized() {
         get().fetch();
 
@@ -58,7 +68,7 @@ export const useAccessStore = create<AccessControlStore>()(
         );
       },
       fetch() {
-        if (fetchState > 0) return;
+        if (fetchState > 0 || getClientConfig()?.buildMode === "export") return;
         fetchState = 1;
         fetch("/api/config", {
           method: "post",
