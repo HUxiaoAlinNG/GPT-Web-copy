@@ -19,7 +19,7 @@
   "dependencies": {
     "@fortaine/fetch-event-source": "^3.0.6",
     "@hello-pangea/dnd": "^16.2.0",
-    "@particle-network/auth": "^0.13.0",
+    "@particle-network/auth": "^0.13.6",
     "@particle-network/connect-react-ui": "^0.13.0",
     "@particle-network/provider": "^0.13.0",
     "@particle-network/solana-wallet": "^0.13.0",

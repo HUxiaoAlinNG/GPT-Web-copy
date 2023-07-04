@@ -1231,29 +1231,29 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@particle-network/analytics@^0.13.0":
-  version "0.13.0"
-  resolved "https://registry-npm.myscrm.cn/repository/pkg/@particle-network/analytics/-/analytics-0.13.0.tgz#926cfcac0d1e60300b5c697ce6932d3b6a33fdee"
-  integrity sha512-5Y+nCMWSl1c1vXF+VjSurjW2YSNV0lBWN9DKWnCeaWRzFy1vwt4VsdsGL9rfwlm5T+GC0wtixmiGPhxqmkTSWg==
+"@particle-network/analytics@^0.13.5":
+  version "0.13.5"
+  resolved "https://registry.yarnpkg.com/@particle-network/analytics/-/analytics-0.13.5.tgz#83c913c93e8fe18b4bd6742d4950e62ff16e50ae"
+  integrity sha512-ca7LIblXkdwtzlGFmqILfWNEpCM+uLiYlM9xoRE2uxoZqPZ33B85TVnFVEHrii0AjZ6epis3ek6OB68woGr3ug==
   dependencies:
     hash.js "^1.1.7"
     uuidv4 "^6.2.13"
 
-"@particle-network/auth@^0.13.0":
-  version "0.13.0"
-  resolved "https://registry-npm.myscrm.cn/repository/pkg/@particle-network/auth/-/auth-0.13.0.tgz#da1cf76fdf2c519dd2b3ec7e7e63ee9e1edfcbb1"
-  integrity sha512-ZDTHxDGzqzZU9KPnUCGWSIJ2SWckcNbenw74S9FRpuXmGrPN/gtlU+YHH0mXEboewq/utol+gqOvHwDx9UbEJQ==
+"@particle-network/auth@^0.13.6":
+  version "0.13.6"
+  resolved "https://registry.yarnpkg.com/@particle-network/auth/-/auth-0.13.6.tgz#f647ebacb2fad49f7ed4b489943ae9260d678bb6"
+  integrity sha512-oJTCyOmuSVprGz6txNMgcX7iY8uP+X/yUi8iyDGnBAyNwC58TbnzBPylmTL8gz1OsPjf6l04ohd4uMJfZeaiGA==
   dependencies:
-    "@particle-network/analytics" "^0.13.0"
-    "@particle-network/common" "^0.13.0"
-    "@particle-network/crypto" "^0.13.0"
+    "@particle-network/analytics" "^0.13.5"
+    "@particle-network/common" "^0.14.0"
+    "@particle-network/crypto" "^0.13.5"
     draggabilly "^3.0.0"
     qs "^6.11.0"
 
-"@particle-network/common@^0.13.0":
-  version "0.13.0"
-  resolved "https://registry-npm.myscrm.cn/repository/pkg/@particle-network/common/-/common-0.13.0.tgz#8f7eac6636c2541262f8f594a51957b51d776438"
-  integrity sha512-kVZ1ykiN9Oovs/qJXEgWPusHIUl7SEih5pJAPgQVggyzPyjpreVA/y6uvZi4hlq6uJAq6LuaqTSGxQLaUIM9PQ==
+"@particle-network/common@^0.14.0":
+  version "0.14.3"
+  resolved "https://registry.yarnpkg.com/@particle-network/common/-/common-0.14.3.tgz#776d5ef017e5e50c9eba3d1fa6aa4ab926d3ecb4"
+  integrity sha512-WVYVu1CUoQC4ZmPMc8KyZTVfms0mq3RX0fcnNptn5BFpToZwo/z8KfK1GEvZhktcTcRdaiofuKYJEhmpAKfmbw==
 
 "@particle-network/connect-react-ui@^0.13.0":
   version "0.13.0"
@@ -1273,10 +1273,10 @@
   dependencies:
     eventemitter3 "^4.0.0"
 
-"@particle-network/crypto@^0.13.0":
-  version "0.13.0"
-  resolved "https://registry-npm.myscrm.cn/repository/pkg/@particle-network/crypto/-/crypto-0.13.0.tgz#e94c02027dcf644b539d217b491c08977fd16f41"
-  integrity sha512-APD/YEuk6fSiUV0HxyQ/Kkixcbu1Qb9cRrPUdpPw4BXZ5aucUarRuEHd61xizEJusb6w5XLhdQLZnC9KcBTqYQ==
+"@particle-network/crypto@^0.13.5":
+  version "0.13.5"
+  resolved "https://registry.yarnpkg.com/@particle-network/crypto/-/crypto-0.13.5.tgz#b0898298deac88379edd4d78f7b94690f49252c8"
+  integrity sha512-jSR78vnNXt6ujzzEIFJS6LtR/O/PpdffqbpTr8CZcSSyHFj3daWt+HzPGSkKEdCNIoFVxuVoHHAfZ82/uKUUBw==
   dependencies:
     crypto-js "^4.1.1"
     uuidv4 "^6.2.13"
