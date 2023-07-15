@@ -35,6 +35,11 @@ const tw: PartialLocaleType = {
       SaveAs: "另存为角色",
     },
   },
+  Password: {
+    Title: "請輸入密碼",
+    Login: "登入",
+    ErrMsg: "密碼無法使用",
+  },
   Export: {
     Title: "將聊天記錄匯出為 Markdown",
     Copy: "複製全部",

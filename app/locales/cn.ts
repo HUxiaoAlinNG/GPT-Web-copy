@@ -55,6 +55,11 @@ const cn = {
       SaveAs: "存为角色",
     },
   },
+  Password: {
+    Title: "请输入密码",
+    Login: "登陆",
+    ErrMsg: "密码无法使用",
+  },
   Export: {
     Title: "分享聊天记录",
     Copy: "全部复制",
@@ -281,8 +286,8 @@ const cn = {
 
 type DeepPartial<T> = T extends object
   ? {
-      [P in keyof T]?: DeepPartial<T[P]>;
-    }
+    [P in keyof T]?: DeepPartial<T[P]>;
+  }
   : T;
 
 export type LocaleType = typeof cn;

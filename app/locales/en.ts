@@ -56,6 +56,11 @@ const en: LocaleType = {
       SaveAs: "Save as Role",
     },
   },
+  Password: {
+    Title: "Please Input Password",
+    Login: "Login",
+    ErrMsg: "The password cannot be used.",
+  },
   Export: {
     Title: "Export Messages",
     Copy: "Copy All",

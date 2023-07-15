@@ -38,7 +38,10 @@ export function IconButton(props: {
       )}
 
       {props.text && (
-        <div className={styles["icon-button-text"]}>{props.text}</div>
+        <div className={
+          styles["icon-button-text"] +
+          props.icon ?? styles["icon-button-text-fix"]
+        }>{props.text}</div>
       )}
     </button>
   );

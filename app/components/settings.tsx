@@ -46,6 +46,7 @@ import { InputRange } from "./input-range";
 import { useNavigate } from "react-router-dom";
 import { Avatar, AvatarPicker } from "./emoji";
 import { getClientConfig } from "../config/client";
+import { PasswordMessageModal } from "./InputOnetimePassword";
 
 function EditPromptModal(props: { id: number; onClose: () => void }) {
   const promptStore = usePromptStore();
@@ -288,6 +289,7 @@ export function Settings() {
   }, []);
   const clientConfig = useMemo(() => getClientConfig(), []);
   const showAccessCode = enabledAccessControl && !clientConfig?.isApp;
+  const [showLoginModal,setShowLoginModal] = useState(false);
   useEffect(() => {
     const sendPreviewBubble = localStorage.getItem("sendPreviewBubble");
     if (!isMobileScreen && !sendPreviewBubble) {
@@ -319,7 +321,15 @@ export function Settings() {
 
         <div className="window-actions">
           <div className="window-action-button">
-            {/* TODO */}
+            {!accessStore.isAuthorized() && (
+              <div className="window-action-button">
+                <IconButton
+                  bordered
+                  text={Locale.Password.Login}
+                  onClick={() => setShowLoginModal(true)}
+                />
+              </div>
+            )}
           </div>
           <div className="window-action-button">
             <IconButton
@@ -597,6 +607,11 @@ export function Settings() {
         {shouldShowPromptModal && (
           <UserPromptModal onClose={() => setShowPromptModal(false)} />
         )}
+        {
+          showLoginModal && (
+            <PasswordMessageModal onClose={() => setShowLoginModal(false)} />
+          )
+        }
       </div>
     </ErrorBoundary>
   );

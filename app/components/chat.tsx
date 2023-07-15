@@ -1,3 +1,11 @@
+/*
+ * @Author: hilin hilin
+ * @Date: 2023-07-15 15:26:02
+ * @LastEditors: hilin hilin
+ * @LastEditTime: 2023-07-15 16:59:25
+ * @FilePath: /GPT-Web-copy/app/components/chat.tsx
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
 /* eslint-disable react/no-string-refs */
 import { useDebouncedCallback } from "use-debounce";
 import React, {
@@ -69,6 +77,7 @@ import { useCommand } from "../command";
 import { prettyObject } from "../utils/format";
 import { ExportMessageModal } from "./exporter";
 import { getClientConfig } from "../config/client";
+import { PasswordMessageModal } from "./InputOnetimePassword";
 
 const Markdown = dynamic(async () => (await import("./markdown")).Markdown, {
   loading: () => <LoadingIcon />,
@@ -469,7 +478,7 @@ export function Chat() {
   const config = useAppConfig();
   const fontSize = config.fontSize;
   const [showExport, setShowExport] = useState(false);
-
+  const [showLoginModal,setShowLoginModal] = useState(false);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const [userInput, setUserInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -743,9 +752,13 @@ export function Chat() {
           )}
         </div>
         <div className="window-actions">
-          {!showMaxIcon && (
+          {(!showMaxIcon && !accessStore.isAuthorized()) && (
             <div className="window-action-button">
-              {/* TODO */}
+              <IconButton
+                bordered
+                text={Locale.Password.Login}
+                onClick={() => setShowLoginModal(true)}
+              />
             </div>
           )}
 
@@ -774,9 +787,13 @@ export function Chat() {
               }}
             />
           </div>
-          {showMaxIcon && (
+          {(showMaxIcon && !accessStore.isAuthorized()) && (
             <div className="window-action-button">
-              {/* TODO */}
+              <IconButton
+                bordered
+                text={Locale.Password.Login}
+                onClick={() => setShowLoginModal(true)}
+              />
             </div>
           )}
           {!showMaxIcon && (
@@ -953,6 +970,11 @@ export function Chat() {
       {showExport && (
         <ExportMessageModal onClose={() => setShowExport(false)} />
       )}
+      {
+        showLoginModal && (
+          <PasswordMessageModal onClose={() => setShowLoginModal(false)} />
+        )
+      }
     </div>
   );
 }

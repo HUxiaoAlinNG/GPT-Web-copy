@@ -21,17 +21,17 @@ const ALL_LANGS = {
   cn,
   en,
   tw,
-  jp,
-  ko,
-  fr,
-  es,
-  it,
-  tr,
-  de,
-  vi,
-  ru,
-  cs,
-  no,
+  // jp,
+  // ko,
+  // fr,
+  // es,
+  // it,
+  // tr,
+  // de,
+  // vi,
+  // ru,
+  // cs,
+  // no,
 };
 
 export type Lang = keyof typeof ALL_LANGS;
@@ -42,17 +42,17 @@ export const ALL_LANG_OPTIONS: Record<Lang, string> = {
   cn: "简体中文",
   en: "English",
   tw: "繁體中文",
-  jp: "日本語",
-  ko: "한국어",
-  fr: "Français",
-  es: "Español",
-  it: "Italiano",
-  tr: "Türkçe",
-  de: "Deutsch",
-  vi: "Tiếng Việt",
-  ru: "Русский",
-  cs: "Čeština",
-  no: "Nynorsk",
+  // jp: "日本語",
+  // ko: "한국어",
+  // fr: "Français",
+  // es: "Español",
+  // it: "Italiano",
+  // tr: "Türkçe",
+  // de: "Deutsch",
+  // vi: "Tiếng Việt",
+  // ru: "Русский",
+  // cs: "Čeština",
+  // no: "Nynorsk",
 };
 
 const LANG_KEY = "lang";
@@ -77,7 +77,7 @@ function getItem(key: string) {
 function setItem(key: string, value: string) {
   try {
     localStorage.setItem(key, value);
-  } catch {}
+  } catch { }
 }
 
 function getLanguage() {

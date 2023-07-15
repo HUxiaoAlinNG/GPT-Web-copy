@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import styles from "./home.module.scss";
 
@@ -25,6 +25,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useMobileScreen } from "../utils";
 import dynamic from "next/dynamic";
 import { showToast } from "./ui-lib";
+import { PasswordMessageModal } from "./InputOnetimePassword";
 
 const ChatList = dynamic(async () => (await import("./chat-list")).ChatList, {
   loading: () => null,
@@ -109,6 +110,7 @@ export function SideBar(props: { className?: string }) {
   const navigate = useNavigate();
   const config = useAppConfig();
   const isMobileScreen = useMobileScreen();
+  const [showLoginModal,setShowLoginModal] = useState(false);
 
   useHotKey();
 
@@ -142,11 +144,16 @@ export function SideBar(props: { className?: string }) {
           onClick={() => showToast(Locale.WIP)}
           shadow
         /> */}
-        {isMobileScreen && (
-          <div className={styles["connect-btn"]}>
-            {/* TODO */}
-          </div>
-        )}
+        {(isMobileScreen && !accessStore.isAuthorized()) && (
+            <div className="window-action-button">
+              <IconButton
+                bordered
+                className={styles["sidebar-bar-button"]}
+                text={Locale.Password.Login}
+                onClick={() => setShowLoginModal(true)}
+              />
+            </div>
+          )}
       </div>
       <div
         className={styles["sidebar-body"]}
@@ -203,6 +210,11 @@ export function SideBar(props: { className?: string }) {
         className={styles["sidebar-drag"]}
         onMouseDown={(e) => onDragMouseDown(e as any)}
       ></div>
+      {
+          showLoginModal && (
+            <PasswordMessageModal onClose={() => setShowLoginModal(false)} />
+          )
+        }
     </div>
   );
 }
