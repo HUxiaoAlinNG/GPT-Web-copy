@@ -5,7 +5,7 @@ const en: LocaleType = {
   WIP: "Coming Soon...",
   Error: {
     Unauthorized:
-      "Unauthorized access, please click [Login] button.",
+      "Unauthorized access, please click on the [Login] button to log in.",
   },
   Auth: {
     Title: "Need Access Code",

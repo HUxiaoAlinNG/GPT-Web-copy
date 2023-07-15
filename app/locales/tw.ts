@@ -4,7 +4,7 @@ import type { PartialLocaleType } from "./index";
 const tw: PartialLocaleType = {
   WIP: "該功能仍在開發中……",
   Error: {
-    Unauthorized: "訪問密碼不正確或為空，請點擊[登入]登陸。",
+    Unauthorized: "訪問密碼不正確或為空，請點擊上方的[登入]按鈕登入。",
   },
   ChatItem: {
     ChatItemCount: (count: number) => `${count} 條對話`,
