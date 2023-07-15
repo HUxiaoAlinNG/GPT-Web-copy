@@ -46,11 +46,6 @@ import { InputRange } from "./input-range";
 import { useNavigate } from "react-router-dom";
 import { Avatar, AvatarPicker } from "./emoji";
 import { getClientConfig } from "../config/client";
-import {
-  ConnectButton,
-  useConnectKit,
-  useParticleTheme,
-} from "@particle-network/connect-react-ui";
 
 function EditPromptModal(props: { id: number; onClose: () => void }) {
   const promptStore = usePromptStore();
@@ -291,22 +286,8 @@ export function Settings() {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const connectKit = useConnectKit();
   const clientConfig = useMemo(() => getClientConfig(), []);
   const showAccessCode = enabledAccessControl && !clientConfig?.isApp;
-  const particleTheme = useParticleTheme();
-  useEffect(() => {
-    if (connectKit) {
-      connectKit.on("connect", () => {
-        accessStore.updateCode("Arclink.123457");
-        console.log("connect");
-      });
-      connectKit.on("disconnect", () => {
-        accessStore.updateCode("");
-        console.log("disconnect");
-      });
-    }
-  }, [connectKit]);
   useEffect(() => {
     const sendPreviewBubble = localStorage.getItem("sendPreviewBubble");
     if (!isMobileScreen && !sendPreviewBubble) {
@@ -338,7 +319,7 @@ export function Settings() {
 
         <div className="window-actions">
           <div className="window-action-button">
-            <ConnectButton />
+            {/* TODO */}
           </div>
           <div className="window-action-button">
             <IconButton
@@ -445,7 +426,6 @@ export function Settings() {
             <Select
               value={config.theme}
               onChange={(e) => {
-                (particleTheme as any).setTheme(e.target.value);
                 updateConfig(
                   (config) => (config.theme = e.target.value as any as Theme),
                 );

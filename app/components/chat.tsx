@@ -28,10 +28,6 @@ import DarkIcon from "../icons/dark.svg";
 import AutoIcon from "../icons/auto.svg";
 import BottomIcon from "../icons/bottom.svg";
 import StopIcon from "../icons/pause.svg";
-import {
-  ConnectButton,
-  useConnectKit,
-} from "@particle-network/connect-react-ui";
 
 import {
   ChatMessage,
@@ -727,20 +723,6 @@ export function Chat() {
       doSubmit(text);
     },
   });
-  const connectKit = useConnectKit();
-  useEffect(() => {
-    if (connectKit) {
-      console.log(connectKit);
-      connectKit.on("connect", () => {
-        accessStore.updateCode("Arclink.123457");
-        console.log("connect");
-      });
-      connectKit.on("disconnect", () => {
-        accessStore.updateCode("");
-        console.log("disconnect");
-      });
-    }
-  }, [connectKit]);
 
   return (
     <div className={styles.chat} key={session.id}>
@@ -763,7 +745,7 @@ export function Chat() {
         <div className="window-actions">
           {!showMaxIcon && (
             <div className="window-action-button">
-              <ConnectButton />
+              {/* TODO */}
             </div>
           )}
 
@@ -794,7 +776,7 @@ export function Chat() {
           </div>
           {showMaxIcon && (
             <div className="window-action-button">
-              <ConnectButton />
+              {/* TODO */}
             </div>
           )}
           {!showMaxIcon && (
