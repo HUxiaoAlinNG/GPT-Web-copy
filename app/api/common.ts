@@ -1,3 +1,11 @@
+/*
+ * @Author: hilin hilin
+ * @Date: 2023-07-15 15:26:02
+ * @LastEditors: hilin hilin
+ * @LastEditTime: 2023-07-15 18:21:19
+ * @FilePath: /GPT-Web-copy/app/api/common.ts
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
 import { NextRequest, NextResponse } from "next/server";
 
 export const OPENAI_URL = "api.openai.com";
@@ -5,6 +13,19 @@ const DEFAULT_PROTOCOL = "https";
 const PROTOCOL = process.env.PROTOCOL ?? DEFAULT_PROTOCOL;
 const BASE_URL = process.env.BASE_URL ?? OPENAI_URL;
 const DISABLE_GPT4 = !!process.env.DISABLE_GPT4;
+
+export async function doSubmitPassword(password: string) {
+  const res = await fetch("/api-go/onetime/verify", {
+    body: JSON.stringify({
+      password,
+    }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+    method: "POST",
+  })
+  return res.json();
+}
 
 export async function requestOpenai(req: NextRequest) {
   const controller = new AbortController();

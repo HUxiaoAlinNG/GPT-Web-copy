@@ -2,7 +2,7 @@
  * @Author: hiLin 123456
  * @Date: 2023-05-12 22:19:28
  * @LastEditors: hilin hilin
- * @LastEditTime: 2023-06-17 22:40:37
+ * @LastEditTime: 2023-07-15 18:13:50
  * @FilePath: /ChatGPT-Next-Web/next.config.mjs
  * @Description: This is default settings. Please set `customMade`, open koroFileHeader to check the details
  *  ref: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
@@ -69,6 +69,10 @@ if (mode !== "export") {
       {
         source: "/api/proxy/:path*",
         destination: "https://api.openai.com/:path*",
+      },
+      {
+        source: "/api-go/:path*",
+        destination: `${process.env.NODE_ENV === 'development' ? "http://127.0.0.1:9000" : "http://154.12.19.84:9000"}/api/:path*`, // TODO
       },
       {
         source: "/google-fonts/:path*",
